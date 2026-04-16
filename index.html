@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gra slowka EN-PL</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section id="setup-screen" class="card">
+      <h1>Nauka slowek EN-PL</h1>
+      <p class="muted">Wybierz tryb, poziom i liczbe pytan.</p>
+
+      <label for="mode-select">Tryb</label>
+      <select id="mode-select">
+        <option value="EN_TO_PL">1) Angielski -> Polski</option>
+        <option value="PL_TO_EN">2) Polski -> Angielski</option>
+      </select>
+
+      <label for="level-select">Poziom</label>
+      <select id="level-select">
+        <option value="easy">easy (3 opcje)</option>
+        <option value="medium">medium (4 opcje)</option>
+        <option value="hard">hard (4 opcje)</option>
+      </select>
+
+      <label for="question-count">Liczba pytan (1-50)</label>
+      <input id="question-count" type="number" min="1" max="50" value="10" />
+
+      <button id="start-btn" class="primary">Start</button>
+      <p id="setup-error" class="error" aria-live="polite"></p>
+    </section>
+
+    <section id="game-screen" class="card hidden" aria-live="polite">
+      <header class="status-row">
+        <span id="progress-text">Pytanie 1/10</span>
+        <span id="score-text">Punkty: 0</span>
+      </header>
+
+      <div id="mode-banner" class="mode-banner">
+        <span id="mode-text">Tryb EN -> PL</span>
+        <span id="mode-flag" class="flag uk" aria-hidden="true"></span>
+      </div>
+
+      <div class="timer-wrap">
+        <div id="timer-bar" class="timer-bar"></div>
+      </div>
+      <p id="timer-text" class="timer-text">Czas: 10s</p>
+
+      <h2 id="prompt-label">Przetlumacz:</h2>
+      <p id="prompt-text" class="prompt"></p>
+
+
+      <div id="options" class="options"></div>
+      <p id="feedback" class="feedback"></p>
+
+      <div class="actions">
+        <button id="exit-btn" class="exit-btn" type="button">Exit</button>
+        <button id="next-btn" class="primary hidden" type="button">Nastepne</button>
+      </div>
+    </section>
+
+    <section id="result-screen" class="card hidden">
+      <h2>Koniec gry</h2>
+      <p id="result-text"></p>
+      <button id="restart-btn" class="primary" type="button">Zagraj ponownie</button>
+    </section>
+  </main>
+
+  <script src="words.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
