@@ -5,7 +5,7 @@ const LEVELS = {
 };
 
 const MAX_QUESTIONS = 50;
-const TIME_LIMIT_SECONDS = 10;
+const TIME_LIMIT_SECONDS = 60;
 const AUTO_NEXT_DELAY_MS = 1200;
 
 const state = {
