@@ -26,9 +26,10 @@ const elements = {
   setupScreen: document.getElementById("setup-screen"),
   gameScreen: document.getElementById("game-screen"),
   resultScreen: document.getElementById("result-screen"),
-  modeSelect: document.getElementById("mode-select"),
-  levelSelect: document.getElementById("level-select"),
+  modeInputs: document.querySelectorAll('input[name="mode"]'),
+  levelInputs: document.querySelectorAll('input[name="level"]'),
   questionCountInput: document.getElementById("question-count"),
+  questionCountValue: document.getElementById("question-count-value"),
   setupError: document.getElementById("setup-error"),
   startBtn: document.getElementById("start-btn"),
   restartBtn: document.getElementById("restart-btn"),
@@ -65,6 +66,11 @@ function sample(array, count) {
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
+}
+
+function getCheckedRadioValue(radioNodeList, fallbackValue) {
+  const selected = [...radioNodeList].find((input) => input.checked);
+  return selected ? selected.value : fallbackValue;
 }
 
 function uniqueTexts(words, key) {
@@ -318,13 +324,13 @@ function goToNextQuestion() {
 function startGame() {
   resetAutoNext();
   const requestedCount = Number(elements.questionCountInput.value);
-  const safeRequested = Number.isFinite(requestedCount) ? requestedCount : 10;
+  const safeRequested = Number.isFinite(requestedCount) ? requestedCount : 25;
 
-  state.mode = elements.modeSelect.value;
-  state.level = elements.levelSelect.value;
+  state.mode = getCheckedRadioValue(elements.modeInputs, "EN_TO_PL");
+  state.level = getCheckedRadioValue(elements.levelInputs, "easy");
 
   const maxAllowed = Math.min(MAX_QUESTIONS, window.WORDS.length);
-  state.questionCount = clamp(Math.trunc(safeRequested), 1, maxAllowed);
+  state.questionCount = clamp(Math.trunc(safeRequested), 10, maxAllowed);
 
   if (!window.WORDS.length) {
     elements.setupError.textContent = "Brak slowek do gry.";
@@ -333,6 +339,7 @@ function startGame() {
 
   elements.setupError.textContent = "";
   elements.questionCountInput.value = state.questionCount;
+  elements.questionCountValue.textContent = String(state.questionCount);
 
   state.questions = sample(window.WORDS, state.questionCount);
   state.index = 0;
@@ -344,11 +351,15 @@ function startGame() {
 }
 
 function init() {
+  elements.questionCountInput.addEventListener("input", () => {
+    elements.questionCountValue.textContent = elements.questionCountInput.value;
+  });
   elements.startBtn.addEventListener("click", startGame);
   elements.restartBtn.addEventListener("click", resetToSetup);
   elements.exitBtn.addEventListener("click", resetToSetup);
   elements.nextBtn.addEventListener("click", goToNextQuestion);
 
+  elements.questionCountValue.textContent = elements.questionCountInput.value;
   applyModeTheme("EN_TO_PL");
   showScreen("setup");
 }

@@ -64,11 +64,42 @@ button {
 }
 
 select,
-input {
+input[type="number"],
+input[type="range"] {
   width: 100%;
   padding: 10px;
   border: 1px solid var(--border);
   border-radius: 8px;
+}
+
+input[type="range"] {
+  padding: 0;
+  height: 34px;
+  border: 0;
+}
+
+.choice-group {
+  margin: 14px 0 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.choice-group legend {
+  font-weight: 700;
+  padding: 0 6px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+  font-weight: 500;
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
 }
 
 button {

@@ -12,21 +12,36 @@
       <h1>Nauka slowek EN-PL</h1>
       <p class="muted">Wybierz tryb, poziom i liczbe pytan.</p>
 
-      <label for="mode-select">Tryb</label>
-      <select id="mode-select">
-        <option value="EN_TO_PL">1) Angielski -> Polski</option>
-        <option value="PL_TO_EN">2) Polski -> Angielski</option>
-      </select>
+      <fieldset class="choice-group">
+        <legend>Tryb</legend>
+        <label class="radio-option" for="mode-en-pl">
+          <input id="mode-en-pl" type="radio" name="mode" value="EN_TO_PL" checked />
+          1) Angielski -> Polski
+        </label>
+        <label class="radio-option" for="mode-pl-en">
+          <input id="mode-pl-en" type="radio" name="mode" value="PL_TO_EN" />
+          2) Polski -> Angielski
+        </label>
+      </fieldset>
 
-      <label for="level-select">Poziom</label>
-      <select id="level-select">
-        <option value="easy">easy (3 opcje)</option>
-        <option value="medium">medium (4 opcje)</option>
-        <option value="hard">hard (4 opcje)</option>
-      </select>
+      <fieldset class="choice-group">
+        <legend>Poziom</legend>
+        <label class="radio-option" for="level-easy">
+          <input id="level-easy" type="radio" name="level" value="easy" checked />
+          easy (3 opcje)
+        </label>
+        <label class="radio-option" for="level-medium">
+          <input id="level-medium" type="radio" name="level" value="medium" />
+          medium (4 opcje)
+        </label>
+        <label class="radio-option" for="level-hard">
+          <input id="level-hard" type="radio" name="level" value="hard" />
+          hard (4 opcje)
+        </label>
+      </fieldset>
 
-      <label for="question-count">Liczba pytan (1-50)</label>
-      <input id="question-count" type="number" min="1" max="50" value="10" />
+      <label for="question-count">Liczba pytan: <span id="question-count-value">25</span></label>
+      <input id="question-count" type="range" min="10" max="50" value="25" />
 
       <button id="start-btn" class="primary">Start</button>
       <p id="setup-error" class="error" aria-live="polite"></p>
